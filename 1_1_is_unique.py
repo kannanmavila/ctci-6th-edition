@@ -3,20 +3,16 @@ characters. What if you cannot use additional data structures?"""
 
 from util import test
 
-def is_unique(string):
-	"""Return True if `string` has no duplicate character."""
-	if string is None:
-		raise ValueError('Not a valid string')
+def is_unique1(string):
+	"""Return True if `string` has no duplicate character.
 
-	result = _is_unique1(string)
-	assert result == _is_unique2(string)
-	return result
-
-def _is_unique1(string):
-	"""Method 1: Hashtable.
+	Method 1: Hashtable.
 	Time: O(N), Space: O(N)
 
 	"""
+	if string is None:
+		raise ValueError('Not a valid string')
+
 	seen = set()
 	for c in string:
 		if c in seen:
@@ -24,11 +20,16 @@ def _is_unique1(string):
 		seen.add(c)
 	return True
 
-def _is_unique2(string):
-	"""Method 2: Sort and search.
+def is_unique2(string):
+	"""Return True if `string` has no duplicate character.
+
+	Method 2: Sort and search.
 	Time: O(NlogN), Space: O(1)
 
 	"""
+	if string is None:
+		raise ValueError('Not a valid string')
+
 	string = sorted(string)
 
 	# Check if adjacent characters are the same
@@ -42,4 +43,4 @@ if __name__ == "__main__":
 		(('abc', ), True),
 		(('', ), True),
 		(('a', ), True)]
-	test(is_unique, testcases)
+	test([is_unique1, is_unique2], testcases)

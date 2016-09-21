@@ -44,4 +44,4 @@ if __name__ == "__main__":
 		(('Mr John Smith', '%20'), 'Mr%20John%20Smith'),
 		(('ab  ', 'XX'), 'abXXXX'),
 		(('a b  ', 'XXXX'), 'aXXXXbXXXXXXXX')]
-	test(urlify, testcases)
+	test([urlify, ], testcases)

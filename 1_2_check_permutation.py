@@ -2,21 +2,17 @@
 
 from util import test
 
-def is_permutation(string1, string2):
-	"""Return True if `string1` is a permutation of `string2`."""
+def is_permutation1(string1, string2):
+	"""Return True if `string1` is a permutation of `string2`.
+
+	Method 1: Hash the character counts and tally.
+	Time: O(N)
+	Space: O(N)
+
+	"""
 	if string1 is None or string2 is None:
 		raise ValueError('Invalid input')
 
-	# Quick optimization - check if the string lengths match
-	if len(string1) != len(string2):
-		return False
-
-	result = _is_permutation1(string1, string2)
-	assert result == _is_permutation2(string1, string2)
-	return result
-
-def _is_permutation1(string1, string2):
-	"""Method 1: Hash the character counts and tally."""
 	# Count character occurrences in string1
 	count = {}
 	for c in string1:
@@ -36,8 +32,14 @@ def _is_permutation1(string1, string2):
 			return False
 	return True
 
-def _is_permutation2(string1, string2):
-	"""Method 2: Sort and compare."""
+def is_permutation2(string1, string2):
+	"""Return True if `string1` is a permutation of `string2`.
+
+	Method 2: Sort and compare.
+	Time: O(NlogN)
+	Space: O(1)
+
+	"""
 	return sorted(string1) == sorted(string2)
 
 if __name__ == "__main__":
@@ -46,4 +48,4 @@ if __name__ == "__main__":
 		(('123', '231'), True),
 		(('a', 'a'), True),
 		(('asddfda', 'adafdsd'), True)]
-	test(is_permutation, testcases)
+	test([is_permutation1, is_permutation2], testcases)
