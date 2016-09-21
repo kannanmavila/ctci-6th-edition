@@ -7,21 +7,31 @@ class TestFailure(Exception):
 	"""
 	pass
 
-def test(function, testcases):
-	"""Test `function` using `testcases`, and compare the output
-	with expected results.
+def test(functions, testcases):
+	"""Test every function in `functions` using `testcases`,
+	and compare the output with expected results.
 
 	Arguments:
-		function - the function to be tested
+		functions - a list of alternate functions that must
+			produce identical results
 		testcases - a list of tuples, each containing:
-			a. a tuple containing arguments to `function`
-			b. the expected output for the corresponding input
+			a. a tuple containing arguments to the functions
+			b. the expected result for the corresponding input
 
 	"""
-	for case, result in testcases:
-		output = function(*case)
-		print case, "-->", output
-		if output != result:
+	for input, result in testcases:
+		outputs = [f(*input) for f in functions]
+
+		# Ensure that functions produce identical outputs
+		if len(set(outputs)) != 1:
+			raise TestFailure("Functions disagree about %s. Outputs:\n%s"
+				% (input, outputs))
+
+		# Display input and output
+		print input, "-->", outputs[0] # Print any output
+
+		# Test the output against the expected result
+		if outputs[0] != result:
 			raise TestFailure("Expected %s, Observed %s"
-				% (result, output))
-	print "\nAll tests passed!"
+				% (result, outputs[0]))
+	print "\nSUCCESS!"
