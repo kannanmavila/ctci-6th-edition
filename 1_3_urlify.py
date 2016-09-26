@@ -1,5 +1,5 @@
-"""Q: Write a method to replace all spaces in a string with '%20' (or
-even better, *any* replacement string)."""
+"""Q: Write a method to replace all spaces in a string with
+'%20' (or even better, *any* replacement string)."""
 
 from util import test
 
