@@ -7,7 +7,10 @@ def is_unique1(string):
 	"""Return True if `string` has no duplicate character.
 
 	Method 1: Hashtable.
-	Time: O(N), Space: O(N)
+	Time: O(N), Space: O(1)
+	NB: Assuming a finite alphabet, space is constant.
+	NB2: Time is arguably O(1) too, as the number of loops
+		will never exceed the alphabet size.
 
 	"""
 	if string is None:
