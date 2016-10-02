@@ -28,10 +28,7 @@ def is_permutation1(string1, string2):
 			return False
 
 	# Ensure all characters "cancelled out"
-	for c in count:
-		if count[c] != 0:
-			return False
-	return True
+	return count.values().count(0) == len(count)
 
 def is_permutation2(string1, string2):
 	"""Return True if `string1` is a permutation of `string2`.
