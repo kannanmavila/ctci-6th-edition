@@ -19,6 +19,9 @@ def test(functions, testcases):
 			a. a tuple containing arguments to the functions
 			b. the expected result for the corresponding input
 
+	TODO: Deep copy input before passing to functions, so that
+	in-place modifications do not mutilate the original input.
+
 	"""
 	for input, result in testcases:
 		outputs = [f(*input) for f in functions]
