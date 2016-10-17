@@ -8,6 +8,17 @@ class TestFailure(Exception):
 	pass
 
 
+def run_function(function, input):
+	"""Run `function` with the specified input, and
+	stringify errors if any.
+
+	"""
+	try:
+		output = function(*input)
+	except Exception as e:
+		return e.message
+	return output
+
 def test(functions, testcases):
 	"""Test every function in `functions` using `testcases`,
 	and compare the output with expected results.
@@ -24,7 +35,7 @@ def test(functions, testcases):
 
 	"""
 	for input, result in testcases:
-		outputs = [f(*input) for f in functions]
+		outputs = [run_function(f, input) for f in functions]
 
 		# Ensure that functions produce identical outputs.
 		# Earlier version created a set and ensured that
@@ -32,8 +43,8 @@ def test(functions, testcases):
 		# types. Hence this naive implementation.
 		for i in xrange(1, len(outputs)):
 			if outputs[i] != outputs[i-1]:
-				raise TestFailure("Functions disagree about %s."
-						" Outputs:\n%s"
+				raise TestFailure("Functions disagree"
+						" about %s. Outputs:\n%s"
 						% (input, outputs))
 
 		# Display input and output
