@@ -1,5 +1,7 @@
 """Utilities for assisting interview coding practice."""
 
+from copy import deepcopy
+
 class TestFailure(Exception):
 	"""Failure denoted by a result not matching the
 	expected output.
@@ -35,7 +37,8 @@ def test(functions, testcases):
 
 	"""
 	for input, result in testcases:
-		outputs = [run_function(f, input) for f in functions]
+		outputs = [run_function(f, deepcopy(input))
+				for f in functions]
 
 		# Ensure that functions produce identical outputs.
 		# Earlier version created a set and ensured that
