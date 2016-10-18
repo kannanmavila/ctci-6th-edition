@@ -79,11 +79,15 @@ if __name__ == "__main__":
 	n1_n2 = Node(2, Node(1, Node(9)))
 	n3 = Node(0)
 	n4 = Node(0)
+	n3_n4 = Node(0)
 	n5 = Node(9)
 	n6 = Node(9)
 	n5_n6 = Node(8, Node(1))
-	n3_n4 = Node(0)
+	n7 = Node(9)
+	n8 = Node(9, Node(9))
+	n7_n8 = Node(8, Node(0, Node(1)))
 	testcases = [((n1, n2), n1_n2),
 		((n3, n4), n3_n4),
-		((n5, n6), n5_n6)]
+		((n5, n6), n5_n6),
+		((n7, n8), n7_n8)]
 	test([add, ], testcases)
