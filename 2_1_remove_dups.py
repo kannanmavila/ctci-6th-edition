@@ -4,12 +4,21 @@ Follow up: How would you solve this problem if a temporary buffer
 is not allowed?"""
 
 from util import test
+from copy import deepcopy
 
 class Node(object):
 	"""A linked-list node."""
 	def __init__(self, value, next=None):
 		self.value = value
 		self.next = next
+
+	def __eq__(self, other):
+		return other is not None and \
+			self.value == other.value and \
+			self.next == other.next
+
+	def __ne__(self, other):
+		return not self == other
 
 	def __str__(self):
 		return str(self.value) + "-" + str(self.next)
@@ -51,13 +60,15 @@ def dedup2(linked_list):
 		raise ValueError('Invalid input')
 
 	def _seen(node):
-		"""Return True if `node` occurs *later* in the linked list."""
-		value = node.value
-		node = node.next
-		while node is not None:
-			if node.value == value:
+		"""Return True if `node` has already been seen *earlier*
+		in the linked list.
+
+		"""
+		check = linked_list
+		while check != node:
+			if check.value == node.value:
 				return True
-			node = node.next
+			check = check.next
 		return False
 
 	# Iterate through the list
@@ -72,20 +83,16 @@ def dedup2(linked_list):
 
 if __name__ == "__main__":
 	ll1 = Node(1, Node(2, Node(3)))
+	ll1_result = deepcopy(ll1)
 	ll2 = Node(1)
-	ll3 = Node(1, Node(1))
+	ll2_result = deepcopy(ll2)
+	ll3 = Node(1, Node(1, Node(1)))
+	ll3_result = Node(1)
 	ll4 = Node(1, Node(2, Node(1)))
+	ll4_result = Node(1, Node(2))
 
-	# Hack: Since the linked lists get modified during run-time,
-	# every test will pass regardless of correctness. We have to
-	# manually verify that the outputs contain no duplicates.
-	testcases = [((ll1, ), ll1),
-		((ll2, ), ll2),
-		((ll3, ), ll3),
-		((ll4, ), ll4)]
-
-	# Hack: Since the linked lists get modified during run-time,
-	# multiple functions cannot be tested due to inconsistency
-	# in the input.
-	# test([dedup1, ], testcases)
-	test([dedup2, ], testcases)
+	testcases = [((ll1, ), ll1_result),
+		((ll2, ), ll2_result),
+		((ll3, ), ll3_result),
+		((ll4, ), ll4_result)]
+	test([dedup1, dedup2], testcases)
