@@ -58,7 +58,7 @@ if __name__ == "__main__":
 	stack = MinStack()
 	#stack.pop() # EmptyStack
 	print stack.min # None
-	for i in [3, 4, 2, 2, 5, 1]:
+	for i in [3, 4, 2, 2, -5, 5, 1]:
 		stack.push(i)
 	while stack.store:
 		print "min:", stack.min, "popping:", stack.pop()
