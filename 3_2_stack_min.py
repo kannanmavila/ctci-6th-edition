@@ -2,8 +2,6 @@
 a function min which returns the minimum element. `push`, `pop`
 and `min` must all operate in O(1) time."""
 
-from util import test
-
 
 class EmptyStack(IndexError):
 	pass
