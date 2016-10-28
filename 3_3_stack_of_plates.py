@@ -20,6 +20,8 @@ class SetOfStacks(object):
 
 	"""
 	def __init__(self, limit=float('inf')):
+		if limit < 1:
+			raise ValueError('Limit must be greater than 0')
 		self.stacks = []
 		self.limit = limit
 
@@ -71,6 +73,7 @@ class SetOfStacks(object):
 		return str(self.stacks)
 
 if __name__ == "__main__":
+	print "--1--"
 	stack = SetOfStacks(3)
 	#stack.pop() # EmptyStack
 	for i in [1, 2, 3, 4, 5, 6, 7]:
@@ -84,3 +87,18 @@ if __name__ == "__main__":
 		print stack.pop()
 		print stack
 	#print stack.pop_at(0) # EmptyStack
+
+	print "--2--"
+	stack = SetOfStacks(1)
+	for i in [1, 2, 3]:
+		stack.push(i)
+	print stack
+	for i in xrange(3):
+		print stack.pop()
+		print stack
+
+	print "--3--"
+	stack = SetOfStacks(0)
+	for i in [1, 2]:
+		stack.push(i)
+	print stack
