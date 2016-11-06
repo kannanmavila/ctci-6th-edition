@@ -2,12 +2,8 @@
 
 from copy import deepcopy
 
-class TestFailure(Exception):
-	"""Failure denoted by a result not matching the
-	expected output.
-
-	"""
-	pass
+FAILED = "\033[91mFAILED!\033[0m"
+SUCCESS = "\033[92m" + "\nSUCCESS!" + "\033[0m"
 
 
 def run_function(function, input):
@@ -46,14 +42,18 @@ def test(functions, testcases):
 		# types. Hence this naive implementation.
 		for i in xrange(1, len(outputs)):
 			if outputs[i] != outputs[i-1]:
-				raise TestFailure("Functions disagree"
-						" about %s. Outputs:\n%s"
+				print ("Functions disagree"
+						" about %s.\nOutputs: %s"
 						% (input, outputs))
+				print FAILED
+				return
 
 		# Display input and output
 		print input, "-->", outputs[0] # Print any output
 
 		# Test the output against the expected result
 		if outputs[0] != result:
-			raise TestFailure("Expected %s" % result)
-	print "\nSUCCESS!"
+			print "Expected %s" % result
+			print FAILED
+			return
+	print SUCCESS
