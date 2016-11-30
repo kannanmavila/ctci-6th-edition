@@ -2,7 +2,7 @@
 
 from copy import deepcopy
 
-FAILED = "\033[91mFAILED!\033[0m"
+FAILED = "\033[91m" + "\nFAILED!" + "\033[0m"
 SUCCESS = "\033[92m" + "\nSUCCESS!" + "\033[0m"
 
 
@@ -27,9 +27,6 @@ def test(functions, testcases):
 		testcases - a list of tuples, each containing:
 			a. a tuple containing arguments to the functions
 			b. the expected result for the corresponding input
-
-	TODO: Deep copy input before passing to functions, so that
-	in-place modifications do not mutilate the original input.
 
 	"""
 	for input, result in testcases:
